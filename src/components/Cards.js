@@ -1,23 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import {Card, CardHeader} from 'material-ui/Card';
+import CardsGraph from './CardsGraph'
+import CardsDoc from './CardsDoc'
 const Cards = ({post}) => (
     <Card>
       <CardHeader
-        title={post.title}
-        subtitle={post.author}
-        avatar={post.thumbnail}
+        title={post.id}
+        subtitle={post.datedExport}
       />
-      <CardTitle title={post.title} subtitle={post.url} />
-      <CardText>
-        {post.selftext}
-      </CardText>
+      <ul>{post.files.doc.map((post, i) => <CardsDoc doc={post} key={i}/>)}</ul>
+      <ul>{post.files.graph.map((post, i) => <CardsGraph graph={post} key={i}/>)}</ul>
+    
     </Card>
 )
 
 Cards.propTypes = {
-  post: PropTypes.array.isRequired
+  post: PropTypes.object.isRequired
 }
 
 export default Cards
