@@ -1,7 +1,12 @@
-import { combineReducers } from 'redux';
-import { SELECT_SUBREDDIT, INVALIDATE_SUBREDDIT, REQUEST_POSTS, RECEIVE_POSTS } from '../actions';
+import { combineReducers } from "redux";
+import {
+  SELECT_SUBREDDIT,
+  INVALIDATE_SUBREDDIT,
+  REQUEST_POSTS,
+  RECEIVE_POSTS
+} from "../actions";
 
-const selectedSubreddit = (state = 'web2web', action) => {
+const selectedSubreddit = (state = "web2web", action) => {
   switch (action.type) {
     case SELECT_SUBREDDIT:
       return action.subreddit;

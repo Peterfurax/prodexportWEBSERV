@@ -1,14 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardText
-} from "material-ui/Card";
+import { Card, CardHeader, CardTitle, CardText } from "material-ui/Card";
 
 const CardsDoc = ({ doc }) => (
+  
   <Card>
+    console.log(doc)
     <CardHeader title={doc.$.href} subtitle={doc.$.href} />
     <CardTitle title={doc.title} subtitle={doc.url} />
     {doc.dbMetadata.map((dbMetadata, i) => (
@@ -17,7 +14,7 @@ const CardsDoc = ({ doc }) => (
           <div>
             {dbMetadata.sys.map((sys, i) => (
               <ul key={i}>
-                {console.log(sys)}
+                {/* {console.log(sys)} */}
                 <li>Createur : {sys.creator}</li>
                 <li>description : {sys.description}</li>
                 <li>lastModifier : {sys.lastModifier}</li>
