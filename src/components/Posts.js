@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Cards from "./Cards";
+import Cards from "./cards";
 const Posts = ({ posts }) => (
-  <ul>{posts.map((post, i) => <Cards post={post} key={i} />)}</ul>
+  <span>{posts.map((post, i) => <Cards post={post} key={i} />)}</span>
 );
 
 Posts.propTypes = {

@@ -8,7 +8,8 @@ import {
 } from "../actions";
 import Picker from "../components/Picker";
 import Posts from "../components/Posts";
-
+import AppBarExampleIcon from "../components/appBar";
+import TabsExampleSwipeable from "../components/tab";
 class App extends Component {
   static propTypes = {
     selectedSubreddit: PropTypes.string.isRequired,
@@ -47,21 +48,6 @@ class App extends Component {
     const isEmpty = posts.length === 0;
     return (
       <div>
-        <Picker
-          value={selectedSubreddit}
-          onChange={this.handleChange}
-          options={["web2web", "print"]}
-        />
-        <p>
-          {lastUpdated && (
-            <span>
-              Last updated at {new Date(lastUpdated).toLocaleTimeString()}.{" "}
-            </span>
-          )}
-          {!isFetching && (
-            <button onClick={this.handleRefreshClick}>Refresh</button>
-          )}
-        </p>
         {isEmpty ? (
           isFetching ? (
             <h2>Loading...</h2>
@@ -70,7 +56,27 @@ class App extends Component {
           )
         ) : (
           <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-            <Posts posts={posts} />
+            {/* <AppBarExampleIcon /> */}
+
+            {/* <Picker
+          value={selectedSubreddit}
+          onChange={this.handleChange}
+          options={["web2web", "print"]}
+        /> */}
+        <TabsExampleSwipeable posts={posts} />
+            <p>
+              {lastUpdated && (
+                <span>
+                  Derniere mise à jour{" "}
+                  {new Date(lastUpdated).toLocaleTimeString()}.{" "}
+                </span>
+              )}
+
+              {!isFetching && (
+                <button onClick={this.handleRefreshClick}>Refresh</button>
+              )}
+            </p>
+            
           </div>
         )}
       </div>
