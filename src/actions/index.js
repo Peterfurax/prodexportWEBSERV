@@ -1,7 +1,16 @@
-export const REQUEST_POSTS = "REQUEST_POSTS";
+export const SEARCH_TERM = "SEARCH_TERM";
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
+export const REQUEST_POSTS = "REQUEST_POSTS";
 export const SELECT_SUBREDDIT = "SELECT_SUBREDDIT";
 export const INVALIDATE_SUBREDDIT = "INVALIDATE_SUBREDDIT";
+
+
+export const searchTerm = term => ({
+  type: SEARCH_TERM,
+  term
+});
+
+
 
 export const selectSubreddit = subreddit => ({
   type: SELECT_SUBREDDIT,
@@ -34,7 +43,8 @@ export const receivePosts = (subreddit, json) => ({
 
 const fetchPosts = subreddit => dispatch => {
   dispatch(requestPosts(subreddit));
-  return fetch(`http://localhost:4001/${subreddit}.json`)
+  // return fetch(`http://localhost:4001/${subreddit}.json`)
+  return fetch(`http://localhost:4001/json`)
     .then(response => response.json())
     .then(json => dispatch(receivePosts(subreddit, json)));
 };

@@ -1,15 +1,38 @@
-import React from 'react';
-import AppBar from 'material-ui/AppBar';
+import React, { Component } from "react";
+import Drawer from "material-ui/Drawer";
+import MenuItem from "material-ui/MenuItem";
+import RaisedButton from "material-ui/RaisedButton";
+import AppBar from "material-ui/AppBar";
+import ButtonExportArticles from "./button/ButtonExportArticles";
+import ButtonExportGraphiques from "./button/ButtonExportGraphiques";
+export default class AppBarre extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { open: false };
+  }
 
-/**
- * A simple example of `AppBar` with an icon on the right.
- * By default, the left icon is a navigation-menu.
- */
-const AppBarExampleIcon = () => (
-  <AppBar
-    title="Web"
-    iconClassNameRight="muidocs-icon-navigation-expand-more"
-  />
-);
+  handleToggle = () => this.setState({ open: !this.state.open });
 
-export default AppBarExampleIcon;
+  render() {
+    return (
+      <div>
+        <AppBar
+          title="Web"
+          onLeftIconButtonClick={this.handleToggle}
+          iconClassNameRight="muidocs-icon-navigation-expand-more"
+        />
+        <Drawer
+          docked={false}
+          open={this.state.open}
+          onRequestChange={open => this.setState({ open })}
+        >
+          <MenuItem>Download CSV</MenuItem>
+          <ButtonExportArticles />
+          <ButtonExportGraphiques />
+
+          <MenuItem>Menu Item 2</MenuItem>
+        </Drawer>
+      </div>
+    );
+  }
+}

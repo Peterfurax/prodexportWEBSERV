@@ -4,19 +4,30 @@ import { connect } from "react-redux";
 import {
   selectSubreddit,
   fetchPostsIfNeeded,
-  invalidateSubreddit
+  invalidateSubreddit,
+  searchTerm
 } from "../actions";
-import Picker from "../components/Picker";
-import Posts from "../components/Posts";
-import AppBarExampleIcon from "../components/appBar";
+// import Picker from "../components/Picker";
+// import Posts from "../components/Posts";
+import AppBarre from "../components/appBar";
 import TabsExampleSwipeable from "../components/tab";
+import {
+  BottomNavigation,
+  BottomNavigationItem
+} from "material-ui/BottomNavigation";
+import Paper from "material-ui/Paper";
+import IconLocationOn from "material-ui/svg-icons/communication/location-on";
+import ButtonExportArticles from "../components/button/ButtonExportArticles";
+import ButtonExportGraphiques from "../components/button/ButtonExportGraphiques";
+const nearbyIcon = <IconLocationOn />;
 class App extends Component {
   static propTypes = {
     selectedSubreddit: PropTypes.string.isRequired,
     posts: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
     lastUpdated: PropTypes.number,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    searchTerm: PropTypes.func.isRequired
   };
 
   componentDidMount() {
@@ -41,6 +52,7 @@ class App extends Component {
     const { dispatch, selectedSubreddit } = this.props;
     dispatch(invalidateSubreddit(selectedSubreddit));
     dispatch(fetchPostsIfNeeded(selectedSubreddit));
+    dispatch(searchTerm("selectedSubreddit"));
   };
 
   render() {
@@ -48,6 +60,7 @@ class App extends Component {
     const isEmpty = posts.length === 0;
     return (
       <div>
+        {/* <AppBarre /> */}
         {isEmpty ? (
           isFetching ? (
             <h2>Loading...</h2>
@@ -63,7 +76,22 @@ class App extends Component {
           onChange={this.handleChange}
           options={["web2web", "print"]}
         /> */}
-        <TabsExampleSwipeable posts={posts} />
+            <TabsExampleSwipeable posts={posts} />
+            {!isFetching && (
+              <div style={{ position: "fixed", bottom: "0", width: "100%" }}>
+                <Paper zDepth={1}>
+                  <BottomNavigation>
+                    <ButtonExportArticles />
+                    <ButtonExportGraphiques />
+                    <BottomNavigationItem
+                      label="Rafraichir"
+                      icon={nearbyIcon}
+                      onClick={this.handleRefreshClick}
+                    />
+                  </BottomNavigation>
+                </Paper>
+              </div>
+            )}
             <p>
               {lastUpdated && (
                 <span>
@@ -71,12 +99,7 @@ class App extends Component {
                   {new Date(lastUpdated).toLocaleTimeString()}.{" "}
                 </span>
               )}
-
-              {!isFetching && (
-                <button onClick={this.handleRefreshClick}>Refresh</button>
-              )}
             </p>
-            
           </div>
         )}
       </div>
@@ -97,7 +120,8 @@ const mapStateToProps = state => {
     selectedSubreddit,
     posts,
     isFetching,
-    lastUpdated
+    lastUpdated,
+    searchTerm
   };
 };
 

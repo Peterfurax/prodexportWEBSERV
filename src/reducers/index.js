@@ -1,10 +1,24 @@
 import { combineReducers } from "redux";
 import {
+  SEARCH_TERM,
   SELECT_SUBREDDIT,
   INVALIDATE_SUBREDDIT,
   REQUEST_POSTS,
   RECEIVE_POSTS
 } from "../actions";
+
+const searchTerm = (state = "", action) => {
+  switch (action.type) {
+    case SEARCH_TERM:
+      return action.term;
+    default:
+      return state;
+  }
+};
+
+
+
+
 
 const selectedSubreddit = (state = "web2web", action) => {
   switch (action.type) {
@@ -64,7 +78,8 @@ const postsBySubreddit = (state = {}, action) => {
 
 const rootReducer = combineReducers({
   postsBySubreddit,
-  selectedSubreddit
+  selectedSubreddit,
+  searchTerm
 });
 
 export default rootReducer;
