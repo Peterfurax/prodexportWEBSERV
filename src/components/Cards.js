@@ -48,7 +48,8 @@ export default class CardExampleControlled extends Component {
 
   render() {
     let post = this.props.post;
-    let files = post.files;
+
+    let files = "files" in post ? post.files : ""
     // let graphs = files.graph;
     let doc = files.doc[0];
     let art = doc.doc[0].article[0];
@@ -68,9 +69,12 @@ export default class CardExampleControlled extends Component {
     let webCategory = web.WebCategory[0];
     let WebSegment = webCategory.WebSegment[0].WebCaption[0];
     let WebSource = webCategory.WebSource[0].WebCaption[0];
-    let WebSousSegment = webCategory.WebSousSegment[0].WebCaption[0];
-    let WebSousTheme = webCategory.WebSousTheme[0].WebCaption[0];
-    let WebTheme = webCategory.WebTheme[0].WebCaption[0];
+    console.log(webCategory.WebSousSegment[0])
+  
+    // let WebSousSegment = webCategory.WebSousSegment[0]
+    // let WebSousSegmentCaption = "WebCaption" in WebSousSegment ? WebSousSegment.WebCaption[0]:"";
+    // let WebSousTheme = webCategory.WebSousTheme[0].WebCaption[0];
+    // let WebTheme = webCategory.WebTheme[0].WebCaption[0];
 
     // console.log(UserMetadataGeneral);
     let sdvKey = web.WebObjId[0];
@@ -152,11 +156,11 @@ export default class CardExampleControlled extends Component {
               <ul>
                 <li>Type : {WebType}</li>
                 <li>Priority : {WebPriority}</li>
-                <li>Segment : {WebSegment}</li>
+                {/* <li>Segment : {WebSegment}</li>
                 <li>Source : {WebSource}</li>
                 <li>SousSegment : {WebSousSegment}</li>
                 <li>SousTheme : {WebSousTheme}</li>
-                <li>Theme : {WebTheme}</li>
+                <li>Theme : {WebTheme}</li> */}
               </ul>
               <Divider />
               <h3>Date</h3>
