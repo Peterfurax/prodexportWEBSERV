@@ -12,11 +12,16 @@ KEYS_TO_FILTERS.push("files.doc.dbMetadata.sys.sdvKey ");
 const styles1 = {
   padding: "10px 10px",
   height: "52px",
-  position: "relative",
+  
   WebkitTransition: " width 2s"
 };
 const divStyle = {
-  WebkitTransition: "all", // note the capital 'W' here
+  width: "100%",
+  padding: "10px 10px",
+  backgroundColor: "#303030",
+  color: 'white',
+  fontSize: 16,
+  position: "relative",// note the capital 'W' here
   msTransition: "all" // 'ms' is the only lowercase vendor prefix
 };
 export default class Searchfilter extends React.Component {

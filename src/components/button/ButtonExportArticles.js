@@ -21,7 +21,7 @@ const ButtonExportArticles = () => (
   <RaisedButton
     label="Articles CSV"
     labelPosition="before"
-    primary={true}
+    primary={false}
     icon={<ActionAndroid />}
     style={styles.button}
     href="http:\\localhost:4001\article"
