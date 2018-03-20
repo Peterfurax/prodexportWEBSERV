@@ -45,7 +45,7 @@ const fetchPosts = subreddit => dispatch => {
   dispatch(requestPosts(subreddit));
   // return fetch(`http://localhost:4001/${subreddit}.json`)
   return fetch(`http://localhost:4001/json`)
-    .then(response => response.json())
+    .then(response =>response.json())
     .then(json => dispatch(receivePosts(subreddit, json)));
 };
 

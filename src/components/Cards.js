@@ -45,7 +45,7 @@ export default class CardExampleControlled extends Component {
   handleReduce = () => {
     this.setState({ expanded: false });
   };
-
+ 
   render() {
     let post = this.props.post;
 
@@ -53,8 +53,9 @@ export default class CardExampleControlled extends Component {
     // let graphs = files.graph;
     let doc = files.doc[0];
     let art = doc.doc[0].article[0];
-    let titre = art.titre[0]["titre-p"][0];
-    // let texte = art.texte[0];
+
+    // let titre = art.titre[0]["titre-p"][0];
+    let texte = art.texte[0];
     // let signature = texte["composant-signature"][0].signature[0];
 
     // ARTICLE DBMETADATA
@@ -69,7 +70,6 @@ export default class CardExampleControlled extends Component {
     let webCategory = web.WebCategory[0];
     let WebSegment = webCategory.WebSegment[0].WebCaption[0];
     let WebSource = webCategory.WebSource[0].WebCaption[0];
-    console.log(webCategory.WebSousSegment[0])
   
     // let WebSousSegment = webCategory.WebSousSegment[0]
     // let WebSousSegmentCaption = "WebCaption" in WebSousSegment ? WebSousSegment.WebCaption[0]:"";
@@ -78,7 +78,9 @@ export default class CardExampleControlled extends Component {
 
     // console.log(UserMetadataGeneral);
     let sdvKey = web.WebObjId[0];
+    console.log(web.WebType[0])
     let WebType = web.WebType[0];
+    // let WebType = "web.WebType[0]";
     let WebPriority = web.WebPriority[0];
     let WebPublicationDate = web.WebPublicationDate[0];
     let WebRelegationDate = web.WebRelegationDate[0];
@@ -102,7 +104,7 @@ export default class CardExampleControlled extends Component {
     let wordCount = props.wordCount;
     let workfolder = props.workFolder;
     let productInfo = props.productInfo[0];
-    let issueDate = productInfo.issueDate[0];
+    let issueDate = "issueDate" in productInfo ? productInfo.issueDate[0]:[];
     let productName = productInfo.name[0];
 
     let objectDate = {
@@ -121,7 +123,7 @@ export default class CardExampleControlled extends Component {
           onExpandChange={this.handleExpandChange}
         >
           <CardHeader
-            title={titre}
+            title={loid}
             subtitle={signature}
             avatar="images/1.jpg"
             actAsExpander={true}
@@ -129,7 +131,7 @@ export default class CardExampleControlled extends Component {
           />
           <CardText expandable={true}>
             <div>
-            <CardTitle title={titre} subtitle={summary} />
+            <CardTitle title={loid} subtitle={summary} />
               <GridListExampleSimple expandable={true} />
               
               <h3>ID</h3>
